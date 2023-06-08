@@ -1,37 +1,191 @@
-# Invera ToDo-List Challenge (Python/Django Jr-SSr)
+# ToDo-List challenge
+Web API that allows users to create and manage their tasks. The ability to create user has no retrictions so anyone can create and account, request a token and start creating their tasks.
 
-El propósito de esta prueba es conocer tu capacidad para crear una pequeña aplicación funcional en un límite de tiempo. A continuación, encontrarás las funciones, los requisitos y los puntos clave que debés tener en cuenta durante el desarrollo.
+# Endpoints
+## List or Create User [/users/]
+- GET: List all users.
+- POST: Create a new user.
 
-## Qué queremos que hagas:
+### List Users [GET]
+- Response 200 (application/json)
+  - Body
+    ```
+    [
+      {
+          "id": 1,
+          "username": "Juan",
+          "email": "juan@example.com"
+      },
+      {
+          "id": 2,
+          "username": "Santiago",
+          "email": "santiago@example.com"
+      }
+    ]
+    ```
+### Create User [POST]
+- Request (application/json)
+  - Payload
+      ```
+    {
+        "username": "newuser",
+        "email": "newuser@example.com"
+        "password: "password
+    }
+      ```
+- Response 201 (application/json)
+  - Body
+      ```
+    {
+        "username": "newuser",
+        "email": "newuser@example.com"
+    } 
+      ```
+ ## Detail User [/users/{user_id}/]
+  - GET: Retrieve user details.
+  - PATCH: Update user details.
+  - DELETE: Delete a user.
 
-- El Challenge consiste en crear una aplicación web sencilla que permita a los usuarios crear y mantener una lista de tareas.
-- La entrega del resultado será en un nuevo fork de este repo y deberás hacer una pequeña demo del funcionamiento y desarrollo del proyecto ante un super comité de las más grandes mentes maestras de Invera, o a un par de devs, lo que sea más fácil de conseguir.
-- Podes contactarnos en caso que tengas alguna consulta.
+### Retrieve User [GET]
+- Response 200 (application/json)
+  - Body
+      ```
+    {
+        "username": "newuser",
+        "email": "newuser@example.com"
+    } 
+      ```
 
-## Objetivos:
+ ### Update User [PATCH]
+- Request (application/json)
+  - Payload
+      ```
+    {
+        "username": "newusername",
+    }
+      ```
+- Response 201 (application/json)
+  - Body
+      ```
+    {
+      "username": "newusername",
+      "email": "newuser@example.com"
+    } 
+      ```
+ ### Delete User [DELETE]
+- Response 204
 
-El usuario de la aplicación tiene que ser capaz de:
+## List or Create User Tasks [/users/<user_id>/tasks/]
+- GET: List all users tasks.
+- POST: Create a new user task.
 
-- Autenticarse
-- Crear una tarea
-- Eliminar una tarea
-- Marcar tareas como completadas
-- Poder ver una lista de todas las tareas existentes
-- Filtrar/buscar tareas por fecha de creación y/o por el contenido de la misma
+### List User Tasks [GET]
+- Response 200 (application/json)
+  - Body
+    ```
+    [
+      {
+            "id": 1,
+            "title": "Do stuff",
+            "description": "An explanation of your task",
+            "date": "2023-10-10T08:00:00Z",
+            "status": "Pendiente",
+            "user": 11
+      },
+      {
+            "id": 2,
+            "title": "Doctor appointment",
+            "description": "Ask for painkillers",
+            "date": "2023-10-10T08:00:00Z",
+            "status": "Pendiente",
+            "user": 11
+      }
+    ]
+    ```
+### Create User Task [POST]
+- Request (application/json)
+  - Payload
+      ```
+    {
+      "title":"Go for a beer",
+      "description":"Invite a friend",
+      "date":"2023-10-10T08:00",
+    }
+      ```
+- Response 201 (application/json)
+  - Body
+      ```
+    {
+      "id": 1,
+      "title":"Go for a beer",
+      "description":"Invite a friend",
+      "date":"2023-10-10T08:00",
+      "status": "Pendiente"
+    } 
+      ```
 
-## Qué evaluamos:
+ ## Detail User Task [/users/{user_id}/tasks/{task_id>]
+  - GET: Retrieve user task details.
+  - PATCH: Update user task details.
+  - DELETE: Delete a user task.
+ 
+### Retrieve User task [GET]
+- Response 200 (application/json)
+  - Body
+      ```
+    {
+      "id": 1,
+      "title": "Go for a beer",
+      "description": "Invite a friend",
+      "date": "2023-10-10T08:00:00Z",
+      "status": "Pendiente"
+    } 
+      ```
 
-- Desarrollo utilizando Python, Django. No es necesario crear un Front-End, pero sí es necesario tener una API que permita cumplir con los objetivos de arriba.
-- Uso de librerías y paquetes estandares que reduzcan la cantidad de código propio añadido.
-- Calidad y arquitectura de código. Facilidad de lectura y mantenimiento del código. Estándares seguidos.
-- [Bonus] Manejo de logs.
-- [Bonus] Creación de tests (unitarias y de integración)
-- [Bonus] Unificar la solución propuesta en una imagen de Docker por repositorio para poder ser ejecutada en cualquier ambiente (si aplica para full stack).
+ ### Update User [PATCH]
+- Request (application/json)
+  - Payload
+      ```
+    {
+        "status": 2, #TODO change this so it allows strings. Temp solution 1: Pendiente; 2: Completado
+    }
+      ```
+- Response 201 (application/json)
+  - Body
+      ```
+    {
+    "id": 1,
+    "title": "Go for a beer",
+    "description": "Invite a friend",
+    "date": "2023-10-10T08:00:00Z",
+    "status": "2"
+    } 
+      ```
+ ### Delete User task [DELETE]
+- Response 204
 
-## Requerimientos de entrega:
+ ## Search User Task [/users/{user_id}/tasks/search/?title='title'&date='date']
+    - GET: Retrieve list of user tasks.
+ ### Search User Tasks [GET]
+- Response 200 (application/json)
+  - Body
+    ```
+    [
+      {
+            "id": 1,
+            "title": "Do stuff",
+            "description": "An explanation of your task",
+            "date": "2023-10-10T08:00:00Z",
+            "status": "Pendiente",
+            "user": 11
+      },
+      {
+            "id": 2,
+            "title": "Doctor appointment",
+            "description": "Ask for painkillers",
+            "date": "2023-10-10T08:00:00Z",
+            "status": "Pendiente",
+            "user": 11
+      }
+    ] 
 
-- Hacer un fork del proyecto y pushearlo en github. Puede ser privado.
-- La solución debe correr correctamente.
-- El Readme debe contener todas las instrucciones para poder levantar la aplicación, en caso de ser necesario, y explicar cómo se usa.
-- Disponibilidad para realizar una pequeña demo del proyecto al finalizar el challenge.
-- Tiempo para la entrega: Aproximadamente 7 días.

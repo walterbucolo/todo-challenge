@@ -225,3 +225,8 @@ IMPORTANT NOTE: Make sure you create an auth token and add it inside the headers
       }
     ] 
 
+# ERRATA
+There are a couple of things that are missing. I will try to update them soon.
+- Integration tests
+- Better handling of status
+- Better handling of authorization

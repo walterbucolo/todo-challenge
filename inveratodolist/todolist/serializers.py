@@ -28,11 +28,11 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ['id', 'title', 'description', 'date', 'status', 'user']
+        fields = ['id', 'title', 'description', 'date', 'status']
 
 
 class TaskCreateSerializer(serializers.ModelSerializer):
-    status = serializers.ChoiceField(choices=Status.choices)
+    status = serializers.CharField(source='get_status_display', read_only=True)
 
     class Meta:
         model = Task

@@ -1,7 +1,41 @@
 # ToDo-List challenge
 Web API that allows users to create and manage their tasks. The ability to create user has no retrictions so anyone can create and account, request a token and start creating their tasks.
 
+IMPORTANT NOTE: Make sure you create an auth token and add it inside the headers before interacting with user tasks endpoints.
+
+# Steps to run the app
+## Running Locally (without Docker)
+1. Clone the project
+2. Create a virtual venv: `python3 -m venv venv`
+3. Install dependencies: `pip install -r requirements.txt`
+4. Run the project: `python manage.py runserver`
+## Running Docker
+1. Clone the project
+2. Make sure you have docker installed. Visit https://docs.docker.com/engine/install/ for more information.
+3. Move to inveratodolist project: `cd todo-challenge/inveratodolist`
+4. Build the image: `docker build -t todolist .`
+5. Run the project: `docker run -p 8000:8000 todolist`
+
 # Endpoints
+## Obtain auth token [/api-token-auth/]
+- POST: Create a new user token
+### Create a new user token [GET]
+- Request (application/json)
+  - Payload
+      ```
+    {
+        "username": "newuser",
+        "password: "password
+    }
+      ```
+- Response 201 (application/json)
+  - Body
+      ```
+    {
+        "token": "auth_token"
+    } 
+      ```
+
 ## List or Create User [/users/]
 - GET: List all users.
 - POST: Create a new user.

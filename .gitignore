@@ -1,0 +1,13 @@
+# Gitignore for Python, Django, DRF, VSCode, and venv
+
+*.pyc
+__pycache__/
+
+venv/
+.env
+
+*.log
+db.sqlite3
+
+.vscode/
+*.code-workspace

@@ -196,11 +196,13 @@ IMPORTANT NOTE: Make sure you create an auth token and add it inside the headers
     } 
       ```
  ### Delete User task [DELETE]
-- Response 204
+  - Response 204
 
- ## Search User Task [/users/{user_id}/tasks/search/?title='title'&date='date']
-    - GET: Retrieve list of user tasks.
- ### Search User Tasks [GET]
+
+## Search User Task [/users/{user_id}/tasks/search/?title='title'&date='date']
+- GET: Search user tasks by title or date.
+
+### Search User Tasks [GET]
 - Response 200 (application/json)
   - Body
     ```
